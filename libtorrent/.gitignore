@@ -1,0 +1,10 @@
+_jnaerator.choices
+_jnaerator.macros.cpp
+_jnaerator.normalizedParsed.cpp
+_jnaerator.preprocessed.c
+_jnaerator.rawParsed.cpp
+libtorrent.so
+libtorrent.dylib
+simple_client
+*.jar
+out.errors.txt
