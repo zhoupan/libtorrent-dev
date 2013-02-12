@@ -13,7 +13,7 @@
     <dependency>
       <groupId>com.github.axet</groupId>
       <artifactId>mavennatives</artifactId>
-      <version>0.0.3</version>
+      <version>0.0.6</version>
     </dependency>
     <dependency>
       <groupId>net.java.dev.jna</groupId>

@@ -5,16 +5,17 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.github.axet.mnp.MavenNatives;
+import com.github.axet.mavennatives.MavenNatives;
 import com.github.axet.torrent.Torrent.State;
+import com.rasterbar.libtorrent.TorrentLibrary.alert_type;
+import com.rasterbar.libtorrent.TorrentLibrary.tags;
 import com.rasterbar.libtorrent.endpoint;
 import com.rasterbar.libtorrent.error_code;
 import com.rasterbar.libtorrent.listen_succeeded_alert;
 import com.rasterbar.libtorrent.torrent_checked_alert;
 import com.rasterbar.libtorrent.torrent_status;
-import com.rasterbar.libtorrent.TorrentLibrary.alert_type;
-import com.rasterbar.libtorrent.TorrentLibrary.tags;
 import com.sun.jna.Memory;
+import com.sun.jna.NativeLibrary;
 import com.sun.jna.Pointer;
 
 public class TorrentLibrary {
@@ -49,7 +50,13 @@ public class TorrentLibrary {
     }
 
     public TorrentLibrary() {
-        MavenNatives.mavenNatives("torrent");
+        MavenNatives.mavenNatives("torrent", new MavenNatives.LoadNatives() {
+            @Override
+            public void setPath(String libraryName, File targetFile) {
+                NativeLibrary.addSearchPath(libraryName, targetFile.getParent());
+                NativeLibrary.getInstance(libraryName);
+            }
+        });
     }
 
     /**
@@ -255,7 +262,7 @@ public class TorrentLibrary {
         }
     }
 
-   public void check(error_code ec) {
+    public void check(error_code ec) {
         if (ec.value > 0) {
             throw new RuntimeException("error_code: " + ec.value + ", " + ec.category.getString(0) + ", "
                     + ec.message.getString(0));
