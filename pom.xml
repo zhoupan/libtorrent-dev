@@ -7,7 +7,7 @@
   <artifactId>torrent</artifactId>
   <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>libtorrentj</name>
+  <name>torrent</name>
 
   <dependencies>
     <dependency>
