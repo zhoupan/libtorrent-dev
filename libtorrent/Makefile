@@ -4,8 +4,8 @@
 # make lib
 # make
 
-INCLUDE = -I /opt/local/include/ -I ../../../include/ -I ../../../include/libtorrent -I ../../c/
-LIB = -L . -L ../../../src/.libs -L /opt/local/lib/
+INCLUDE = -I /opt/local/include/ -I ../../libtorrent/include/ -I ../../libtorrent/include/libtorrent -I ./c/
+LIB = -L . -L ../../libtorrent/src/.libs -L /opt/local/lib/
 JNAERATOR = jnaerator-0.11-shaded.jar
 FLAGS = -DBOOST_FILESYSTEM_VERSION=2 -DBOOST_ASIO_DYN_LINK -fPIC
 
@@ -30,7 +30,7 @@ autogen:
 	(cd ../../libtorrent && ./configure)
 
 simple_client:
-	g++ $(INCLUDE) $(LIB) $(FLAGS) -l torrent ../../c/simple_client.c -o simple_client
+	g++ $(INCLUDE) $(LIB) $(FLAGS) -l torrent ./c/simple_client.c -o simple_client
 
 clean:
 	rm -f _jnaerator*

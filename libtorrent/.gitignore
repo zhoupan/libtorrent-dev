@@ -4,6 +4,7 @@ _jnaerator.normalizedParsed.cpp
 _jnaerator.preprocessed.c
 _jnaerator.rawParsed.cpp
 libtorrent.so
+library.o
 libtorrent.dylib
 simple_client
 *.jar
