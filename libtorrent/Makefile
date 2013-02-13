@@ -58,10 +58,6 @@ pack:
 
 mvn:
 	mvn install:install-file -Dfile=libtorrent-mac.jar \
-	  -DgroupId=com.rasterbar \
-      -DartifactId=libtorrent \
-      -Dversion=0.16.8-SNAPSHOT \
-      -Dpackaging=jar \
-      -Dclassifier=natives-mac \
-      -DgeneratePom=true \
-      -DcreateChecksum=true
+	  -DpomFile=libtorrent.pom \
+	  -Dpackaging=jar \
+	  -Dclassifier=natives-mac-x86_64
