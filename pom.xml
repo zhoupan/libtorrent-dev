@@ -6,7 +6,7 @@
   <groupId>com.github.axet</groupId>
   <artifactId>torrent</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>torrent</name>
 
   <dependencies>
