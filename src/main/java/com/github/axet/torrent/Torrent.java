@@ -3,12 +3,12 @@ package com.github.axet.torrent;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rasterbar.libtorrent.file_entry;
-import com.rasterbar.libtorrent.save_resume_data_alert;
-import com.rasterbar.libtorrent.save_resume_data_failed_alert;
-import com.rasterbar.libtorrent.torrent_status;
-import com.rasterbar.libtorrent.torrent_title;
-import com.rasterbar.libtorrent.TorrentLibrary.alert_type;
+import com.github.axet.torrent.rasterbar.TorrentLibrary.alert_type;
+import com.github.axet.torrent.rasterbar.file_entry;
+import com.github.axet.torrent.rasterbar.save_resume_data_alert;
+import com.github.axet.torrent.rasterbar.save_resume_data_failed_alert;
+import com.github.axet.torrent.rasterbar.torrent_status;
+import com.github.axet.torrent.rasterbar.torrent_title;
 import com.sun.jna.Pointer;
 
 public class Torrent {
@@ -20,7 +20,7 @@ public class Torrent {
     Pointer t;
 
     TorrentLibrary inst;
-    com.rasterbar.libtorrent.TorrentLibrary lib;
+    com.github.axet.torrent.rasterbar.TorrentLibrary lib;
 
     boolean pauseAfterChecked;
 

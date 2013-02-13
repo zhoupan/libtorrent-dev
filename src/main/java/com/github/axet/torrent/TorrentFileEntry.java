@@ -1,6 +1,6 @@
 package com.github.axet.torrent;
 
-import com.rasterbar.libtorrent.file_entry;
+import com.github.axet.torrent.rasterbar.file_entry;
 
 public class TorrentFileEntry {
     public final int index;
