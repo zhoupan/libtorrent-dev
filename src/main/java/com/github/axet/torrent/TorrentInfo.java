@@ -1,6 +1,6 @@
 package com.github.axet.torrent;
 
-import com.rasterbar.libtorrent.torrent_title;
+import com.github.axet.torrent.rasterbar.torrent_title;
 
 public class TorrentInfo {
 

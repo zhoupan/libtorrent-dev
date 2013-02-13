@@ -6,7 +6,7 @@
   <groupId>com.github.axet</groupId>
   <artifactId>torrent</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <name>torrent</name>
 
   <dependencies>
@@ -18,12 +18,7 @@
     <dependency>
       <groupId>net.java.dev.jna</groupId>
       <artifactId>jna</artifactId>
-      <version>3.4.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.rasterbar</groupId>
-      <artifactId>libtorrent</artifactId>
-      <version>0.16.0-SNAPSHOT</version>
+      <version>3.5.1</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -34,10 +29,11 @@
 
   <profiles>
     <profile>
-      <id>mac</id>
+      <id>mac-x64</id>
       <activation>
         <os>
           <family>mac</family>
+          <arch>x86_64</arch>
         </os>
       </activation>
       <dependencies>
@@ -45,7 +41,7 @@
           <groupId>com.rasterbar</groupId>
           <artifactId>libtorrent</artifactId>
           <classifier>natives-mac</classifier>
-          <version>0.16.0-SNAPSHOT</version>
+          <version>0.16.8-SNAPSHOT</version>
         </dependency>
       </dependencies>
     </profile>

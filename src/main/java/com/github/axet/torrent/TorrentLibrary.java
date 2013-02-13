@@ -7,19 +7,19 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.github.axet.mavennatives.MavenNatives;
 import com.github.axet.torrent.Torrent.State;
-import com.rasterbar.libtorrent.TorrentLibrary.alert_type;
-import com.rasterbar.libtorrent.TorrentLibrary.tags;
-import com.rasterbar.libtorrent.endpoint;
-import com.rasterbar.libtorrent.error_code;
-import com.rasterbar.libtorrent.listen_succeeded_alert;
-import com.rasterbar.libtorrent.torrent_checked_alert;
-import com.rasterbar.libtorrent.torrent_status;
+import com.github.axet.torrent.rasterbar.TorrentLibrary.alert_type;
+import com.github.axet.torrent.rasterbar.TorrentLibrary.tags;
+import com.github.axet.torrent.rasterbar.endpoint;
+import com.github.axet.torrent.rasterbar.error_code;
+import com.github.axet.torrent.rasterbar.listen_succeeded_alert;
+import com.github.axet.torrent.rasterbar.torrent_checked_alert;
+import com.github.axet.torrent.rasterbar.torrent_status;
 import com.sun.jna.Memory;
 import com.sun.jna.NativeLibrary;
 import com.sun.jna.Pointer;
 
 public class TorrentLibrary {
-    com.rasterbar.libtorrent.TorrentLibrary lib;
+    com.github.axet.torrent.rasterbar.TorrentLibrary lib;
 
     Pointer ses;
 
@@ -233,7 +233,7 @@ public class TorrentLibrary {
     }
 
     public void create() {
-        lib = com.rasterbar.libtorrent.TorrentLibrary.INSTANCE;
+        lib = com.github.axet.torrent.rasterbar.TorrentLibrary.INSTANCE;
 
         if (lib == null)
             throw new RuntimeException("unable to load library");
