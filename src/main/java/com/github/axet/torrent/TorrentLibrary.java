@@ -19,7 +19,6 @@ import com.sun.jna.NativeLibrary;
 import com.sun.jna.Pointer;
 
 public class TorrentLibrary {
-
     com.rasterbar.libtorrent.TorrentLibrary lib;
 
     Pointer ses;
@@ -45,11 +44,7 @@ public class TorrentLibrary {
     static final int UPLOAD_SPEED = 10 * 1024;
     static final int DOWNLOAD_SPEED = 300 * 1024;
 
-    public static class TorrentState {
-        public byte[] resumeData;
-    }
-
-    public TorrentLibrary() {
+    static {
         MavenNatives.mavenNatives("torrent", new MavenNatives.LoadNatives() {
             @Override
             public void setPath(String libraryName, File targetFile) {
@@ -57,6 +52,9 @@ public class TorrentLibrary {
                 NativeLibrary.getInstance(libraryName);
             }
         });
+    }
+    
+    public TorrentLibrary() {
     }
 
     /**
@@ -158,7 +156,7 @@ public class TorrentLibrary {
      * @param st
      * @return readable string
      */
-    public String status(torrent_status st) {
+    static public String status(torrent_status st) {
         String str;
         str = String.format("%.0f%% / down %.0f kB/s / up %.0f kB/s / peers %d / %s / pause: %d",
                 (double) st.progress * 100., (double) st.download_payload_rate / 1000.,
@@ -187,7 +185,7 @@ public class TorrentLibrary {
         lib.session_set_settings(ses, tags.SET_DOWNLOAD_RATE_LIMIT, bps, tags.TAG_END);
     }
 
-    public void check(torrent_status st) {
+    static void check(torrent_status st) {
         if (strLen(st.error) > 0) {
             throw new RuntimeException(toString(st.error));
         }
@@ -388,16 +386,12 @@ public class TorrentLibrary {
 
         Torrent t = lib.add(magnet, target);
 
-        torrent_status st = new torrent_status();
-
         int count = 0;
 
         while (true) {
             System.out.println("count: " + count);
 
-            st = t.status();
-
-            System.out.println(lib.status(st));
+            System.out.println(t.status());
 
             // if (count == 5)
             // t.recheck();
@@ -411,8 +405,6 @@ public class TorrentLibrary {
                 System.out.println("t " + t);
                 t.resume();
             }
-
-            lib.check(st);
 
             try {
                 Thread.sleep(1000);

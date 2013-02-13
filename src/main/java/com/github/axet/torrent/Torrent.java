@@ -36,17 +36,42 @@ public class Torrent {
     }
 
     public State state() {
-        torrent_status st = status();
+        torrent_status st = torrentStatus();
         return State.values()[st.state];
     }
 
-    torrent_status status() {
+    torrent_status torrentStatus() {
         torrent_status st = new torrent_status();
 
         if (lib.torrent_get_status(t, st, st.size()) < 0)
             throw new RuntimeException("Unable to retrive status");
 
         return st;
+    }
+
+    public String status() {
+        torrent_status st = torrentStatus();
+        TorrentLibrary.check(st);
+
+        return TorrentLibrary.status(st);
+    }
+
+    public long getTotal() {
+        torrent_status st = torrentStatus();
+        TorrentLibrary.check(st);
+        return st.total_wanted;
+    }
+
+    public long getCount() {
+        torrent_status st = torrentStatus();
+        TorrentLibrary.check(st);
+        return st.total_wanted_done;
+    }
+
+    public long getDownloadRate() {
+        torrent_status st = torrentStatus();
+        TorrentLibrary.check(st);
+        return (long) st.download_payload_rate;
     }
 
     public TorrentInfo getInfo() {
@@ -58,7 +83,7 @@ public class Torrent {
     }
 
     public void pause() {
-        if (status().paused == 1)
+        if (torrentStatus().paused == 1)
             return;
 
         Pointer p = inst.waitForAlert(new int[] { alert_type.at_torrent_paused_alert }, new Runnable() {
@@ -113,7 +138,7 @@ public class Torrent {
     }
 
     public void recheck() {
-        boolean p = status().paused == 1;
+        boolean p = torrentStatus().paused == 1;
 
         pauseAfterChecked = p;
 
