@@ -9,7 +9,7 @@ LIB = -L . -L ../../libtorrent/src/.libs -L /opt/local/lib/
 JNAERATOR = jnaerator-0.11-shaded.jar
 FLAGS = -DBOOST_FILESYSTEM_VERSION=2 -DBOOST_ASIO_DYN_LINK -fPIC
 
-all: libtorrent.dylib jar pack mvn
+all: libtorrent.dylib ../src/main/java/com/github/axet/torrent/rasterbar pack mvn
 
 library.o: ./c/library.cpp ./c/libtorrent.h
 	g++ $(INCLUDE) $(FLAGS) -c $<
@@ -44,24 +44,19 @@ clean:
 jnaerator-0.11-shaded.jar:
 	wget http://jnaerator.googlecode.com/files/jnaerator-0.11-shaded.jar
 
-jar: $(SHAREDLIBRARY) $(JNAERATOR)
+generate: $(SHAREDLIBRARY) $(JNAERATOR)
 	java -jar $(JNAERATOR) -noLibBundle -library torrent ./c/libtorrent.h \
-	libtorrent.dylib -package com.rasterbar.libtorrent -o . -jar libtorrent.jar -v \
-	-mode Jar -runtime JNA
+	libtorrent.dylib -package com.github.axet.torrent.rasterbar -o ../src/main/java/ -v \
+	-mode Directory -runtime JNA -f
+
+../src/main/java/com/github/axet/torrent/rasterbar:
+	make generate
 
 pack:
 	rm -f libtorrent-mac.jar
 	(cd . && zip libtorrent-mac.jar *.so *.dylib)
 
 mvn:
-	mvn install:install-file -Dfile=libtorrent.jar \
-	  -DgroupId=com.rasterbar \
-      -DartifactId=libtorrent \
-      -Dversion=0.16.8-SNAPSHOT \
-      -Dpackaging=jar \
-      -DgeneratePom=true \
-      -DcreateChecksum=true
-
 	mvn install:install-file -Dfile=libtorrent-mac.jar \
 	  -DgroupId=com.rasterbar \
       -DartifactId=libtorrent \
