@@ -38,10 +38,10 @@
       </activation>
       <dependencies>
         <dependency>
-          <groupId>com.rasterbar</groupId>
+          <groupId>com.github.axet.torrent.rasterbar</groupId>
           <artifactId>libtorrent</artifactId>
-          <classifier>natives-mac</classifier>
-          <version>0.16.8-SNAPSHOT</version>
+          <classifier>natives-mac-x86_64</classifier>
+          <version>0.16.8</version>
         </dependency>
       </dependencies>
     </profile>
